@@ -1,8 +1,16 @@
-# Importing the required libraries
-import requests
+# importing the required libraries
+# changed from requests to from urllib3 so I could bypass SSL verification manually
+
+
+import urllib3
 import json
 
-# URL for CSO dataset
+
+# I use my work laptop so I had to use cert_reqs='CERT_NONE' to disable SSL verification - not typically a good practice, I know
+http = urllib3.PoolManager(cert_reqs='CERT_NONE', assert_hostname=False)
+
+
+# URL for CSO dataset:
 url = "https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.ReadDataset/FIQ02/JSON-stat/1.0/en"
 
 # Try block - helps catch errors
